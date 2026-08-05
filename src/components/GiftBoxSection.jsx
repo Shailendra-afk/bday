@@ -81,7 +81,7 @@ export const GiftBoxSection = () => {
             initial={{ opacity: 0, scale: 0.85, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="w-full max-w-2xl bg-black rounded-3xl overflow-hidden shadow-2xl border-2 border-[#F472B6]/60 pink-glow relative aspect-video flex items-center justify-center"
+            className="w-full max-w-xs sm:max-w-md mx-auto bg-black rounded-3xl overflow-hidden shadow-2xl border-2 border-[#F472B6]/60 pink-glow relative aspect-[9/16] max-h-[75vh] flex items-center justify-center"
           >
             <video
               src={giftData?.videoUrl || "/videos/gift_video.mp4"}
@@ -89,7 +89,7 @@ export const GiftBoxSection = () => {
               autoPlay
               loop
               playsInline
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain rounded-3xl"
               onError={(e) => {
                 // Fallback to clip1.mp4 if gift_video.mp4 isn't present
                 if (!e.target.src.includes('clip1.mp4')) {
