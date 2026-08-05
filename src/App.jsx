@@ -292,7 +292,10 @@ export default function App() {
           {/* Chapter 7: Gift Box */}
           {unlockedLevel >= 7 && (
             <div>
-              <GiftBoxSection />
+              <GiftBoxSection
+                isBgMusicPlaying={isPlaying}
+                setIsBgMusicPlaying={setIsPlaying}
+              />
               <SectionUnlockGate
                 currentLevel={7}
                 unlockedLevel={unlockedLevel}

@@ -1,12 +1,41 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
-import { Gift, Heart, Sparkles, Award } from 'lucide-react';
+import { Gift, X } from 'lucide-react';
 import { birthdayData } from '../config/birthdayData';
 
-export const GiftBoxSection = () => {
+export const GiftBoxSection = ({ isBgMusicPlaying, setIsBgMusicPlaying }) => {
   const [isOpened, setIsOpened] = useState(false);
   const giftData = birthdayData.giftSurprise;
+  const wasMusicPlayingRef = useRef(false);
+  const videoRef = useRef(null);
+
+  // Handle background music pause on open & resume on close
+  useEffect(() => {
+    if (!setIsBgMusicPlaying) return;
+
+    if (isOpened) {
+      if (isBgMusicPlaying) {
+        wasMusicPlayingRef.current = true;
+        setIsBgMusicPlaying(false);
+      }
+    } else if (wasMusicPlayingRef.current) {
+      setIsBgMusicPlaying(true);
+      wasMusicPlayingRef.current = false;
+    }
+  }, [isOpened, setIsBgMusicPlaying]);
+
+  const handleCloseGift = (e) => {
+    if (e) e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+    setIsOpened(false);
+    if (wasMusicPlayingRef.current && setIsBgMusicPlaying) {
+      setIsBgMusicPlaying(true);
+      wasMusicPlayingRef.current = false;
+    }
+  };
 
   const handleOpenGift = () => {
     if (isOpened) return;
@@ -81,14 +110,42 @@ export const GiftBoxSection = () => {
             initial={{ opacity: 0, scale: 0.85, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="w-full max-w-xs sm:max-w-md mx-auto bg-black rounded-3xl overflow-hidden shadow-2xl border-2 border-[#F472B6]/60 pink-glow relative aspect-[9/16] max-h-[75vh] flex items-center justify-center"
+            className="w-full max-w-xs sm:max-w-md mx-auto bg-black rounded-3xl overflow-hidden shadow-2xl border-2 border-[#F472B6]/60 pink-glow relative aspect-[9/16] max-h-[75vh] flex items-center justify-center group"
           >
+            {/* Close Video Button */}
+            <button
+              onClick={handleCloseGift}
+              className="absolute top-3 right-3 z-30 w-8 h-8 rounded-full bg-black/60 hover:bg-[#EC4899] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all shadow-lg"
+              title="Close video & re-seal box"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
             <video
+              ref={videoRef}
               src={giftData?.videoUrl || "/videos/gift_video.mp4"}
               controls
               autoPlay
               loop
               playsInline
+              onPlay={() => {
+                if (setIsBgMusicPlaying && isBgMusicPlaying) {
+                  wasMusicPlayingRef.current = true;
+                  setIsBgMusicPlaying(false);
+                }
+              }}
+              onPause={() => {
+                if (setIsBgMusicPlaying && wasMusicPlayingRef.current) {
+                  setIsBgMusicPlaying(true);
+                  wasMusicPlayingRef.current = false;
+                }
+              }}
+              onEnded={() => {
+                if (setIsBgMusicPlaying && wasMusicPlayingRef.current) {
+                  setIsBgMusicPlaying(true);
+                  wasMusicPlayingRef.current = false;
+                }
+              }}
               className="w-full h-full object-contain rounded-3xl"
               onError={(e) => {
                 // Fallback to clip1.mp4 if gift_video.mp4 isn't present
