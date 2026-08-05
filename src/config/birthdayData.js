@@ -300,25 +300,25 @@ export const birthdayData = {
   // 3.8 Our Memories 35mm Film Strip Videos
   ourMemoriesVideos: [
     { id: 1, videoUrl: "/videos/mem_clip1.mp4" },
-    { id: 2, videoUrl: "/videos/mem_clip2.mov" },
-    { id: 3, videoUrl: "/videos/mem_clip3.mov" },
+    { id: 2, videoUrl: "/videos/mem_clip2.mp4" },
+    { id: 3, videoUrl: "/videos/mem_clip3.mp4" },
     { id: 4, videoUrl: "/videos/mem_clip4.mp4" },
     { id: 5, videoUrl: "/videos/mem_clip5.mp4" },
-    { id: 6, videoUrl: "/videos/mem_clip6.mov" },
-    { id: 7, videoUrl: "/videos/mem_clip7.mov" },
+    { id: 6, videoUrl: "/videos/mem_clip6.mp4" },
+    { id: 7, videoUrl: "/videos/mem_clip7.mp4" },
     { id: 8, videoUrl: "/videos/mem_clip8.mp4" },
     { id: 9, videoUrl: "/videos/mem_clip9.mp4" },
     { id: 10, videoUrl: "/videos/mem_clip10.mp4" },
     { id: 11, videoUrl: "/videos/mem_clip11.mp4" },
     { id: 12, videoUrl: "/videos/mem_clip12.mp4" },
-    { id: 13, videoUrl: "/videos/mem_clip13.mov" },
-    { id: 14, videoUrl: "/videos/mem_clip14.mov" },
-    { id: 15, videoUrl: "/videos/mem_clip15.mov" },
-    { id: 16, videoUrl: "/videos/mem_clip16.mov" },
-    { id: 17, videoUrl: "/videos/mem_clip17.mov" },
-    { id: 18, videoUrl: "/videos/mem_clip18.mov" },
+    { id: 13, videoUrl: "/videos/mem_clip13.mp4" },
+    { id: 14, videoUrl: "/videos/mem_clip14.mp4" },
+    { id: 15, videoUrl: "/videos/mem_clip15.mp4" },
+    { id: 16, videoUrl: "/videos/mem_clip16.mp4" },
+    { id: 17, videoUrl: "/videos/mem_clip17.mp4" },
+    { id: 18, videoUrl: "/videos/mem_clip18.mp4" },
     { id: 19, videoUrl: "/videos/mem_clip19.mp4" },
-    { id: 20, videoUrl: "/videos/mem_clip20.mov" }
+    { id: 20, videoUrl: "/videos/mem_clip20.mp4" }
   ],
 
   // 3.9 Cinematic Movie & Series Montage Clips
