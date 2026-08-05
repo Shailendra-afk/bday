@@ -12,7 +12,7 @@ export const birthdayData = {
   subtitle: "This little surprise was made just for you.",
   heroQuote: "Some people make life more beautiful simply by being in it.",
   birthDate: "August 1, 2026",
-  heroPhotoUrl: "/photos/shade2.png",
+  heroPhotoUrl: "/photos/new_hero.jpg",
   auraVideoUrl: "/videos/aura_center.mp4",
 
   // 2. Background Music Configuration
