@@ -45,17 +45,14 @@ export const GiftBoxSection = () => {
   return (
     <section id="gift" className="py-20 px-4 sm:px-6 max-w-4xl mx-auto text-center relative">
       {/* Section Header */}
-      <div className="space-y-4 mb-14">
+      <div className="space-y-4 mb-10">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-[#F472B6]/40 text-xs font-sans-luxury text-[#9D174D]">
           <Gift className="w-4 h-4 text-[#EC4899]" />
-          <span>A Special Birthday Present</span>
+          <span>Surprise Gift Box</span>
         </div>
         <h2 className="font-serif-luxury text-3xl sm:text-5xl font-bold text-[#701A40]">
           Your Surprise Gift Box
         </h2>
-        <p className="font-sans-luxury text-base text-[#9D174D] max-w-md mx-auto">
-          Tap the ribbon-tied gift box below to unwrap your birthday surprise.
-        </p>
       </div>
 
       {/* Gift Box Container */}
@@ -77,49 +74,29 @@ export const GiftBoxSection = () => {
             <div className="relative z-20 w-20 h-20 rounded-full bg-[#FFF0F5] border-2 border-[#EC4899] flex flex-col items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
               <Gift className="w-10 h-10 text-[#831843] animate-bounce" />
             </div>
-
-            <p className="relative z-20 font-sans-luxury text-xs uppercase tracking-widest font-bold text-[#831843] mt-4 bg-white/90 px-3 py-1 rounded-full shadow-sm">
-              Tap To Untie Ribbon
-            </p>
           </motion.div>
         ) : (
-          /* Revealed Gift Card Content */
+          /* Revealed Video Container (No Wordings) */
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 30 }}
+            initial={{ opacity: 0, scale: 0.85, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="w-full max-w-lg bg-[#FFF0F5] rounded-3xl p-8 shadow-2xl border-2 border-[#F472B6]/60 pink-glow relative text-center space-y-6"
+            className="w-full max-w-2xl bg-black rounded-3xl overflow-hidden shadow-2xl border-2 border-[#F472B6]/60 pink-glow relative aspect-video flex items-center justify-center"
           >
-            <div className="w-16 h-16 rounded-full bg-[#FCE7F0] border border-[#F472B6]/50 flex items-center justify-center mx-auto shadow-inner">
-              <Award className="w-8 h-8 text-[#EC4899]" />
-            </div>
-
-            <div>
-              <h3 className="font-serif-luxury text-2xl font-bold text-[#701A40]">
-                {giftData.title}
-              </h3>
-              <p className="font-sans-luxury text-sm text-[#9D174D] mt-2 leading-relaxed">
-                {giftData.message}
-              </p>
-            </div>
-
-            {/* Special Voucher Card */}
-            <div className="p-4 rounded-2xl bg-gradient-to-r from-[#F9A8D4]/40 via-[#FFF0F5] to-[#FCE7F0]/40 border border-[#F472B6]/40 space-y-1">
-              <p className="font-sans-luxury text-xs text-[#EC4899] font-bold uppercase tracking-wider">
-                Official Birthday Pass
-              </p>
-              <p className="font-serif-luxury text-lg font-bold text-[#831843]">
-                {giftData.voucherCode}
-              </p>
-              <p className="font-script-luxury text-xl text-[#9D174D]">
-                "{giftData.voucherText}"
-              </p>
-            </div>
-
-            <div className="flex items-center justify-center gap-2 text-xs text-[#9D174D] font-sans-luxury">
-              <Heart className="w-4 h-4 text-[#EC4899] fill-[#EC4899]" />
-              <span>Unwrapped with love for {birthdayData.recipientName}</span>
-            </div>
+            <video
+              src={giftData?.videoUrl || "/videos/gift_video.mp4"}
+              controls
+              autoPlay
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                // Fallback to clip1.mp4 if gift_video.mp4 isn't present
+                if (!e.target.src.includes('clip1.mp4')) {
+                  e.target.src = '/videos/clip1.mp4';
+                }
+              }}
+            />
           </motion.div>
         )}
       </div>

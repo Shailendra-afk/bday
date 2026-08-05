@@ -459,10 +459,7 @@ export const birthdayData = {
 
   // 8. Surprise Gift Box Content
   giftSurprise: {
-    title: "A Golden Box of Wishes",
-    message: "May your birthday be overflowing with sweet laughter, delicate flowers, warm hugs, and moments you will treasure forever.",
-    voucherCode: "VIP-BDAY-MAGIC-2026",
-    voucherText: "Entitles you to unlimited happiness & one giant birthday hug!"
+    videoUrl: "/videos/gift_video.mp4"
   },
 
   // 9. Final Celebration Message
