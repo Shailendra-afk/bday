@@ -9,20 +9,41 @@ export const GiftBoxSection = ({ isBgMusicPlaying, setIsBgMusicPlaying }) => {
   const giftData = birthdayData.giftSurprise;
   const wasMusicPlayingRef = useRef(false);
   const videoRef = useRef(null);
+  const sectionRef = useRef(null);
 
-  // Handle background music pause on open & resume on close
+  // Scroll detection: Pause bg music when video section is in view, resume when scrolled away
   useEffect(() => {
-    if (!setIsBgMusicPlaying) return;
+    const el = sectionRef.current;
+    if (!el || !setIsBgMusicPlaying || !isOpened) return;
 
-    if (isOpened) {
-      if (isBgMusicPlaying) {
-        wasMusicPlayingRef.current = true;
-        setIsBgMusicPlaying(false);
-      }
-    } else if (wasMusicPlayingRef.current) {
-      setIsBgMusicPlaying(true);
-      wasMusicPlayingRef.current = false;
-    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          // Video section is in viewport -> Pause background music & play gift video
+          wasMusicPlayingRef.current = true;
+          setIsBgMusicPlaying(false);
+          if (videoRef.current && videoRef.current.paused) {
+            videoRef.current.play().catch(() => {});
+          }
+        } else {
+          // Scrolled away from video section -> Resume background music & pause video
+          if (wasMusicPlayingRef.current) {
+            setIsBgMusicPlaying(true);
+          }
+          if (videoRef.current && !videoRef.current.paused) {
+            videoRef.current.pause();
+          }
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+    };
   }, [isOpened, setIsBgMusicPlaying]);
 
   const handleCloseGift = (e) => {
@@ -72,7 +93,7 @@ export const GiftBoxSection = ({ isBgMusicPlaying, setIsBgMusicPlaying }) => {
   };
 
   return (
-    <section id="gift" className="py-20 px-4 sm:px-6 max-w-4xl mx-auto text-center relative">
+    <section id="gift" ref={sectionRef} className="py-20 px-4 sm:px-6 max-w-4xl mx-auto text-center relative">
       {/* Section Header */}
       <div className="space-y-4 mb-10">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-[#F472B6]/40 text-xs font-sans-luxury text-[#9D174D]">
