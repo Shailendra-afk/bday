@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+:root {
+  --pink-bg: #FFF0F5;
+  --pink-text: #701A40;
+  --pink-accent: #EC4899;
+  --pink-secondary: #F472B6;
+  --pink-glow: rgba(236, 72, 153, 0.6);
+  --pink-hue: 330deg;
+}
+
+/* Global 1.2s Smooth Transition for Whole Theme Color Shift */
+* {
+  transition: color 1.2s ease-in-out, background-color 1.2s ease-in-out, border-color 1.2s ease-in-out, box-shadow 1.2s ease-in-out;
+}
+
+body {
+  background-color: var(--pink-bg);
+  color: var(--pink-text);
+}
+
+@layer utilities {
+  .font-serif-luxury {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  .font-script-luxury {
+    font-family: 'Dancing Script', cursive;
+  }
+  .font-sans-luxury {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  /* Dynamic Theme Classes tied to 5-second Pink Shade Switcher */
+  .text-pink-theme {
+    color: var(--pink-text);
+  }
+
+  .text-pink-accent {
+    color: var(--pink-accent);
+  }
+
+  .text-pink-secondary {
+    color: var(--pink-secondary);
+  }
+
+  .bg-pink-theme {
+    background-color: var(--pink-bg);
+  }
+
+  .bg-pink-accent {
+    background-color: var(--pink-accent);
+  }
+
+  .border-pink-theme {
+    border-color: var(--pink-secondary);
+  }
+
+  .glass-panel {
+    background: rgba(255, 240, 245, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--pink-secondary);
+    box-shadow: 0 0 25px var(--pink-glow);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--pink-secondary);
+    box-shadow: 0 0 20px var(--pink-glow);
+  }
+
+  .glass-dark {
+    background: rgba(45, 10, 30, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--pink-secondary);
+  }
+
+  .pink-glow,
+  .gold-glow {
+    box-shadow: 0 0 30px var(--pink-glow);
+  }
+
+  .pink-glow-hover:hover,
+  .gold-glow-hover:hover {
+    box-shadow: 0 0 45px var(--pink-glow);
+  }
+
+  /* Dynamic 5-second Multi-Shade Pink Text Gradient */
+  .text-pink-gradient,
+  .text-gold-gradient {
+    background: linear-gradient(135deg, var(--pink-accent) 0%, var(--pink-secondary) 50%, var(--pink-text) 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pinkGradientMove 5s ease-in-out infinite;
+  }
+
+  /* Dynamic Theme Shifting Button */
+  .btn-pink-theme {
+    background: linear-gradient(135deg, var(--pink-accent), var(--pink-secondary), var(--pink-accent));
+    color: #ffffff;
+    box-shadow: 0 0 25px var(--pink-glow);
+  }
+}
+
+/* Custom Animations */
+@keyframes pinkGradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.animate-float {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Smooth custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--pink-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--pink-secondary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pink-accent);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
