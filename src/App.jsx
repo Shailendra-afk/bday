@@ -206,6 +206,7 @@ export default function App() {
       <HeroSection
         onOpenSurprise={handleOpenSurprise}
         hasOpened={hasStarted}
+        isSiteLocked={isSiteLocked}
       />
 
       {/* Sequential Content Sections Revealed Level by Level */}

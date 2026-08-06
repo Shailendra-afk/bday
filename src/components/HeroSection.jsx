@@ -3,24 +3,30 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Heart } from 'lucide-react';
 import { birthdayData } from '../config/birthdayData';
 
-export const HeroSection = ({ onOpenSurprise, hasOpened }) => {
-  const [isAwakening, setIsAwakening] = useState(true);
+export const HeroSection = ({ onOpenSurprise, hasOpened, isSiteLocked }) => {
+  const [isAwakening, setIsAwakening] = useState(false);
   const [typedQuote, setTypedQuote] = useState('');
   const [isTypingDone, setIsTypingDone] = useState(false);
   const fullQuote = birthdayData.heroQuote || "Some people make life more beautiful simply by being in it.";
 
-  // Initial Awakening Blackout Sequence (1.2 Seconds)
+  // Initial Awakening Sequence (1.8 Seconds) when site is unlocked
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsAwakening(false);
-    }, 1200);
+    if (!isSiteLocked) {
+      setIsAwakening(true);
+      setTypedQuote('');
+      setIsTypingDone(false);
 
-    return () => clearTimeout(timer);
-  }, []);
+      const timer = setTimeout(() => {
+        setIsAwakening(false);
+      }, 1800);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isSiteLocked]);
 
   // Typewriter effect logic (starts after awakening)
   useEffect(() => {
-    if (isAwakening) return;
+    if (isAwakening || isSiteLocked) return;
 
     let index = 0;
     const timer = setInterval(() => {
@@ -34,13 +40,13 @@ export const HeroSection = ({ onOpenSurprise, hasOpened }) => {
     }, 45);
 
     return () => clearInterval(timer);
-  }, [isAwakening, fullQuote]);
+  }, [isAwakening, isSiteLocked, fullQuote]);
 
   return (
     <div className="relative min-h-screen w-full flex flex-col justify-center items-center px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#FFF0F5] via-[#FCE7F0] to-[#FFF0F5] select-none">
       
       {/* ========================================================================= */}
-      {/* INITIAL MAGICAL AWAKENING TRANSITION OVERLAY */}
+      {/* MAGICAL AWAKENING TRANSITION OVERLAY ON UNLOCK */}
       {/* ========================================================================= */}
       <AnimatePresence>
         {isAwakening && (
@@ -48,18 +54,23 @@ export const HeroSection = ({ onOpenSurprise, hasOpened }) => {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.9, ease: 'easeInOut' }}
-            className="fixed inset-0 z-50 bg-[#0A0314] flex flex-col items-center justify-center gap-4 text-center px-4"
+            className="fixed inset-0 z-50 bg-[#0A0314] flex flex-col items-center justify-center gap-5 text-center px-4"
           >
-            {/* Glowing Ambient Halo */}
-            <div className="absolute w-72 h-72 rounded-full bg-pink-500/20 blur-3xl animate-pulse" />
-            
-            <Sparkles className="w-8 h-8 text-pink-400 animate-spin z-10" style={{ animationDuration: '4s' }} />
-            
-            <p className="font-serif-luxury text-base sm:text-lg tracking-widest text-pink-200/90 uppercase animate-pulse z-10 font-bold drop-shadow-md">
-              Awakening Magical Experience...
-            </p>
+            {/* Glowing Ambient Halos */}
+            <div className="absolute w-80 h-80 rounded-full bg-gradient-to-tr from-pink-600/30 via-fuchsia-500/30 to-purple-600/30 blur-3xl animate-pulse" />
+            <div className="absolute w-60 h-60 rounded-full bg-rose-500/20 blur-2xl animate-ping" style={{ animationDuration: '3s' }} />
 
-            <div className="w-32 h-0.5 bg-gradient-to-r from-transparent via-pink-400 to-transparent animate-pulse z-10" />
+            <div className="relative z-10 flex items-center justify-center gap-3">
+              <Sparkles className="w-8 h-8 text-pink-400 animate-spin" style={{ animationDuration: '4s' }} />
+              <Heart className="w-7 h-7 text-pink-500 fill-pink-500 animate-bounce" />
+              <Sparkles className="w-8 h-8 text-fuchsia-400 animate-spin" style={{ animationDuration: '4s' }} />
+            </div>
+
+            <h3 className="font-serif-luxury text-xl sm:text-2xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-pink-200 via-rose-100 to-pink-300 uppercase animate-pulse z-10 font-bold drop-shadow-lg">
+              Awakening Magical Moments...
+            </h3>
+
+            <div className="w-44 h-0.5 bg-gradient-to-r from-transparent via-pink-400 to-transparent animate-pulse z-10" />
           </motion.div>
         )}
       </AnimatePresence>
