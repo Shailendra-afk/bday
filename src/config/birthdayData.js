@@ -400,14 +400,14 @@ export const birthdayData = {
 
   // 5. Handwritten Birthday Letter
   birthdayLetter: {
-    greeting: "Dearest Pranathi,",
+    greeting: "Dearest Pranathi, ❤️",
     paragraphs: [
-      "On this magical day, I wanted to create something truly everlasting to express just how deeply appreciated and loved you are.",
-      "You have this rare, captivating ability to light up any room with your grace, kindness, and effortless charm. Your presence is like warm sunlight on a quiet morning—gentle, soothing, and utterly irreplaceable.",
-      "Thank you for being my confidante, my source of inspiration, and one of the brightest blessings in my universe. May this upcoming year unfold like a dream, bringing you peace, wild success, and endless reasons to smile.",
-      "Happy Birthday, my dear friend. Here's to forever celebrating you!"
+      "Happy Birthday to someone who means so much to me. I'm truly grateful to have you in my life.",
+      "I hope this year brings you endless happiness, success, love, and everything your heart wishes for. You deserve all the beautiful things life has to offer.",
+      "Keep smiling, keep shining, and never forget how incredibly special you are.",
+      "Have the most beautiful birthday. ❤️"
     ],
-    signOff: "With all my heart & affection,"
+    signOff: "With love,\nShailendran",
   },
 
   // 6. Reasons You're Amazing
