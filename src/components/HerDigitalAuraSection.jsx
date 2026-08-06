@@ -413,25 +413,22 @@ export const HerDigitalAuraSection = () => {
               </button>
 
               {/* High-Res Photo Display */}
-              <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl flex items-center justify-center bg-black max-h-[66vh]">
+              <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl flex items-center justify-center bg-black max-h-[72vh]">
                 <img
                   src={activePhoto.photoUrl}
                   alt={activePhoto.title || "Photo View"}
-                  className="max-h-[64vh] w-auto max-w-full object-contain rounded-xl select-none"
+                  className="max-h-[70vh] w-auto max-w-full object-contain rounded-xl select-none"
                 />
               </div>
 
-              {/* Photo Title & Description Caption */}
-              <div className="w-full text-center px-5 py-2.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 space-y-1">
-                <h3 className="font-serif-luxury text-lg sm:text-xl font-bold text-pink-200">
-                  {activePhoto.title}
-                </h3>
-                {activePhoto.caption && (
-                  <p className="font-sans-luxury text-xs sm:text-sm text-pink-100/90 max-w-xl mx-auto leading-relaxed">
-                    "{activePhoto.caption}"
-                  </p>
-                )}
-              </div>
+              {/* Photo Title */}
+              {activePhoto.title && (
+                <div className="w-full text-center px-5 py-2 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
+                  <h3 className="font-serif-luxury text-lg sm:text-xl font-bold text-pink-200">
+                    {activePhoto.title}
+                  </h3>
+                </div>
+              )}
             </motion.div>
           </div>
         )}
