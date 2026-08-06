@@ -467,7 +467,15 @@ export const birthdayData = {
 
   // 8. Surprise Gift Box Content
   giftSurprise: {
-    videoUrl: "/videos/gift_video.mp4"
+    videoUrl: "/videos/gift_video.mp4",
+    realGiftPhotoUrl: "/photos/real_gift.png",
+    title: "One Last Surprise",
+    lines: [
+      "The laughter was only the beginning...",
+      "This isn't just a picture.",
+      "It's waiting for you in the real world."
+    ],
+    badge: "🎁 Reserved Especially for You"
   },
 
   // 9. Final Celebration Message
