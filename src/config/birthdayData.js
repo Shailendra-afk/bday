@@ -404,7 +404,6 @@ export const birthdayData = {
     paragraphs: [
       "Happy Birthday to someone who means so much to me. I'm truly grateful to have you in my life.",
       "I hope this year brings you endless happiness, success, love, and everything your heart wishes for. You deserve all the beautiful things life has to offer.",
-      "Keep smiling, keep shining, and never forget how incredibly special you are.",
       "Have the most beautiful birthday. ❤️"
     ],
     signOff: "With love,\nShailendran",
