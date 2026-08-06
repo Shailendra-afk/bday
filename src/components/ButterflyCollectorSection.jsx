@@ -83,18 +83,18 @@ const BUTTERFLY_STYLES = {
 // --- MEMORIES DATA LIST (With Distinct Quadrant Coordinates & Custom GPU Orbit Animations) ---
 const MEMORIES_LIST = [
   {
-    id: 'golden',
-    type: 'golden',
-    styleKey: 'golden',
-    title: 'The Golden Secret',
-    subtitle: 'A Secret Message Just For You',
+    id: 'mem-0',
+    type: 'photo',
+    styleKey: 'fuchsia',
+    title: 'A Heartfelt Secret',
+    subtitle: 'A special message just for you',
     date: 'Forever Memory',
-    caption: 'You found the rare Golden Butterfly! Here is a secret, heartfelt message crafted exclusively for you...',
+    caption: 'Every moment shared with you adds a touch of magic to life. Wishing you endless happiness and love today and always!',
     photoUrl: '/photos/butterfly_1.jpg',
-    isGolden: true,
+    isGolden: false,
     baseX: '50%',
     baseY: '24%',
-    size: 64,
+    size: 56,
     animName: 'roam-golden',
     animDuration: '20s',
     animDelay: '-2s'
@@ -495,8 +495,8 @@ export const ButterflyCollectorSection = () => {
           </p>
 
           <div className="pt-1 flex items-center justify-center gap-1.5 text-[11px] font-sans-luxury text-[#BE185D]/90">
-            <Crown className="w-3.5 h-3.5 text-amber-500 animate-bounce" />
-            <span>Look out for the hidden <strong>Golden Butterfly</strong> for a secret surprise!</span>
+            <Sparkles className="w-3.5 h-3.5 text-[#EC4899] animate-bounce" />
+            <span>Tap any floating butterfly to unveil treasured memories!</span>
           </div>
         </div>
 
