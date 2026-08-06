@@ -468,20 +468,20 @@ export const ButterflyCollectorSection = () => {
         </div>
 
         {/* SECTION HEADER */}
-        <div className="relative z-10 text-center pt-8 px-4 space-y-3">
+        <div className="relative z-10 text-center pt-8 px-4 space-y-2">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 backdrop-blur-md border border-[#F472B6]/40 shadow-sm text-xs font-sans-luxury text-[#9D174D]">
             <Sparkles className="w-3.5 h-3.5 text-[#EC4899] animate-spin" style={{ animationDuration: '6s' }} />
             <span>Enchanted Memory Garden</span>
             <span className="w-1.5 h-1.5 rounded-full bg-[#EC4899]" />
             <span className="font-semibold text-[#831843]">
-              Caught: {unlockedMemories.size} / {MEMORIES_LIST.length}
+              {unlockedMemories.size} / {MEMORIES_LIST.length}
             </span>
             {unlockedMemories.size > 0 && (
               <button
                 onClick={handleResetGarden}
                 className="ml-1 text-[11px] font-semibold text-[#EC4899] hover:text-[#BE185D] underline transition-colors"
               >
-                Release All
+                Reset
               </button>
             )}
           </div>
@@ -489,19 +489,10 @@ export const ButterflyCollectorSection = () => {
           <h2 className="font-serif-luxury text-3xl sm:text-5xl font-bold text-[#701A40]">
             Butterfly Collector
           </h2>
-
-          <p className="font-sans-luxury text-xs sm:text-sm text-[#9D174D] max-w-lg mx-auto leading-relaxed">
-            Floating across the garden are delicate butterflies carrying our treasured memories. Tap a butterfly to gently catch it and reveal its hidden magic!
-          </p>
-
-          <div className="pt-1 flex items-center justify-center gap-1.5 text-[11px] font-sans-luxury text-[#BE185D]/90">
-            <Sparkles className="w-3.5 h-3.5 text-[#EC4899] animate-bounce" />
-            <span>Tap any floating butterfly to unveil treasured memories!</span>
-          </div>
         </div>
 
         {/* FLUTTERING BUTTERFLIES GARDEN VIEWPORT */}
-        <div className="absolute inset-0 pt-28 pb-6 overflow-hidden">
+        <div className="absolute inset-0 pt-24 pb-6 overflow-hidden">
           {MEMORIES_LIST.map((bot) => {
             const style = BUTTERFLY_STYLES[bot.styleKey] || BUTTERFLY_STYLES.rose;
             const isLanding = landingButterfly && landingButterfly.id === bot.id;
@@ -520,7 +511,7 @@ export const ButterflyCollectorSection = () => {
                   position: 'absolute',
                   left: isLanding ? '50%' : bot.baseX,
                   top: isLanding ? '50%' : bot.baseY,
-                  zIndex: isLanding ? 40 : bot.isGolden ? 30 : 20,
+                  zIndex: isLanding ? 40 : 20,
                   animation: isLanding
                     ? 'none'
                     : `${bot.animName} ${bot.animDuration} linear infinite ${bot.animDelay}`,
@@ -528,11 +519,6 @@ export const ButterflyCollectorSection = () => {
                 }}
                 className="butterfly-container group p-8 -m-8 flex items-center justify-center rounded-full cursor-pointer hover:scale-125 transition-transform duration-300"
               >
-                {/* Golden Glow Aura */}
-                {bot.isGolden && (
-                  <div className="absolute inset-0 rounded-full bg-amber-400/40 blur-md animate-pulse pointer-events-none" />
-                )}
-
                 {/* Touch Target Hover Pulse Ring */}
                 <div className="absolute inset-3 rounded-full border border-dashed border-white/60 opacity-20 group-hover:opacity-100 group-hover:border-[#EC4899] group-hover:animate-ping transition-opacity duration-300 pointer-events-none" />
 
@@ -540,14 +526,8 @@ export const ButterflyCollectorSection = () => {
                 <SVGButterfly
                   styleKey={bot.styleKey}
                   size={bot.size}
-                  isGolden={bot.isGolden}
+                  isGolden={false}
                 />
-
-                {/* Hover Label */}
-                <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap px-2.5 py-0.5 rounded-full bg-white/95 border border-[#F472B6]/40 text-[10px] font-sans-luxury text-[#701A40] shadow-md flex items-center gap-1">
-                  {isUnlocked && <Sparkles className="w-2.5 h-2.5 text-amber-500" />}
-                  <span>{bot.title}</span>
-                </div>
               </div>
             );
           })}
@@ -555,21 +535,12 @@ export const ButterflyCollectorSection = () => {
           {/* ALL CAUGHT GARDEN COMPLETION BANNER */}
           {unlockedMemories.size === MEMORIES_LIST.length && (
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 space-y-4 z-10 bg-white/30 backdrop-blur-xs">
-              <div className="w-16 h-16 rounded-full bg-amber-100 border border-amber-300 flex items-center justify-center shadow-lg animate-bounce">
-                <Crown className="w-8 h-8 text-amber-500" />
-              </div>
-              <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#701A40]">
-                All Memories Collected!
-              </h3>
-              <p className="font-sans-luxury text-xs sm:text-sm text-[#9D174D] max-w-sm leading-relaxed">
-                You have caught every delicate butterfly and unveiled all hidden memory secrets in the garden!
-              </p>
               <button
                 onClick={handleResetGarden}
-                className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#EC4899] to-[#F472B6] text-white font-sans-luxury text-xs font-medium hover:opacity-95 transition-all shadow-md flex items-center gap-2"
+                className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#EC4899] to-[#F472B6] text-white font-sans-luxury text-xs font-medium hover:opacity-95 transition-all shadow-md flex items-center gap-2 cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
-                <span>Release All Butterflies Back to Garden</span>
+                <span>Replay Garden</span>
               </button>
             </div>
           )}
@@ -584,123 +555,38 @@ export const ButterflyCollectorSection = () => {
       </div>
 
       {/* ========================================================================= */}
-      {/* GLASSMORPHIC MEMORY CARD MODAL */}
+      {/* PHOTO-ONLY MODAL */}
       {/* ========================================================================= */}
       <AnimatePresence>
         {activeMemory && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/50 backdrop-blur-md">
+          <div
+            onClick={handleCloseCard}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-md cursor-pointer"
+          >
             <motion.div
-              initial={{ scale: 0.7, opacity: 0, y: 30 }}
+              initial={{ scale: 0.8, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.7, opacity: 0, y: 30 }}
+              exit={{ scale: 0.8, opacity: 0, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className={`relative w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl border ${
-                activeMemory.isGolden
-                  ? 'bg-gradient-to-b from-[#1C160C]/95 via-[#2D2312]/95 to-[#170F05]/95 border-amber-400/60 text-amber-50 shadow-amber-500/20'
-                  : 'glass-card border-[#F472B6]/50 text-[#701A40]'
-              }`}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-lg rounded-3xl p-3 sm:p-4 shadow-2xl glass-card border border-[#F472B6]/50 bg-gradient-to-b from-white/95 via-[#FFF0F5]/95 to-white/95 overflow-hidden"
             >
               {/* Top Close Button */}
               <button
                 onClick={handleCloseCard}
-                className="absolute top-4 right-4 p-2 rounded-full bg-black/10 hover:bg-black/20 text-current transition-colors"
+                className="absolute top-5 right-5 z-20 p-2.5 rounded-full bg-black/50 hover:bg-black/75 text-white transition-colors cursor-pointer border border-white/30 shadow-lg"
                 aria-label="Close"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              {/* Header Badge */}
-              <div className="flex items-center gap-2 mb-4">
-                {activeMemory.isGolden ? (
-                  <span className="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-sans-luxury font-medium flex items-center gap-1.5">
-                    <Crown className="w-3.5 h-3.5 text-amber-400 animate-spin" style={{ animationDuration: '5s' }} />
-                    Golden Secret Unlocked
-                  </span>
-                ) : (
-                  <span className="px-3 py-1 rounded-full bg-[#FFF0F5] border border-[#F472B6]/40 text-[#BE185D] text-xs font-sans-luxury font-medium flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-[#EC4899]" />
-                    {activeMemory.date}
-                  </span>
-                )}
-              </div>
-
-              {/* Memory Title */}
-              <h3
-                className={`font-serif-luxury text-2xl sm:text-3xl font-bold mb-2 ${
-                  activeMemory.isGolden ? 'text-amber-200' : 'text-[#701A40]'
-                }`}
-              >
-                {activeMemory.title}
-              </h3>
-
-              <p
-                className={`font-sans-luxury text-xs sm:text-sm mb-6 ${
-                  activeMemory.isGolden ? 'text-amber-300/80' : 'text-[#9D174D]'
-                }`}
-              >
-                {activeMemory.subtitle}
-              </p>
-
-              {/* MEDIA CONTAINER */}
-              <div className="relative rounded-2xl overflow-hidden mb-6 border border-white/20 shadow-md group">
-                {activeMemory.type === 'video' ? (
-                  /* Video Card Preview */
-                  <div
-                    onClick={() => setFullscreenVideo({ videoUrl: activeMemory.videoUrl, title: activeMemory.title })}
-                    className="relative aspect-video bg-black cursor-pointer overflow-hidden flex items-center justify-center"
-                  >
-                    <video
-                      src={activeMemory.videoUrl}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
-                      muted
-                      loop
-                      autoPlay
-                      playsInline
-                    />
-                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                      <div className="w-14 h-14 rounded-full bg-white/30 backdrop-blur-md border border-white/60 flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform">
-                        <Play className="w-7 h-7 fill-white translate-x-0.5" />
-                      </div>
-                    </div>
-                    <div className="absolute bottom-2 right-2 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] text-white font-sans-luxury flex items-center gap-1">
-                      <Maximize2 className="w-3 h-3" />
-                      <span>Expand Video</span>
-                    </div>
-                  </div>
-                ) : (
-                  /* Photo Card Preview */
-                  <div className="relative aspect-[4/3] bg-pink-900/10 overflow-hidden flex items-center justify-center">
-                    <img
-                      src={activeMemory.photoUrl}
-                      alt={activeMemory.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                  </div>
-                )}
-              </div>
-
-              {/* Caption */}
-              <p
-                className={`font-sans-luxury text-sm leading-relaxed mb-6 italic ${
-                  activeMemory.isGolden ? 'text-amber-100/90' : 'text-[#831843]'
-                }`}
-              >
-                "{activeMemory.caption}"
-              </p>
-
-              {/* Footer Release Button */}
-              <div className="flex justify-end gap-3 pt-2 border-t border-current/10">
-                <button
-                  onClick={handleCloseCard}
-                  className={`px-5 py-2.5 rounded-full text-xs font-sans-luxury font-medium transition-all shadow-sm flex items-center gap-2 ${
-                    activeMemory.isGolden
-                      ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 hover:from-amber-300 hover:to-amber-400 shadow-amber-500/30'
-                      : 'bg-gradient-to-r from-[#EC4899] to-[#F472B6] text-white hover:opacity-95 shadow-[#EC4899]/30'
-                  }`}
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                  <span>Release Butterfly</span>
-                </button>
+              {/* PHOTO CONTAINER ONLY */}
+              <div className="relative rounded-2xl overflow-hidden border-2 border-white/60 shadow-xl bg-pink-900/10">
+                <img
+                  src={activeMemory.photoUrl}
+                  alt="Butterfly Memory Photo"
+                  className="w-full h-auto max-h-[75vh] object-cover rounded-2xl select-none"
+                />
               </div>
             </motion.div>
           </div>
