@@ -15,6 +15,15 @@ export const birthdayData = {
   heroPhotoUrl: "/photos/new_hero.jpg",
   auraVideoUrl: "/videos/aura_center.mp4",
 
+  // 1.5 Website Password Protection Configuration
+  passcodeConfig: {
+    enabled: true, // Set to false if you want to disable password protection
+    passcode: "070806", // 6-digit secret passcode
+    hint: "Hint: Enter the secret 6-digit passcode (070806) 💖",
+    title: "Secret Birthday Realm",
+    subtitle: "Enter the secret passcode to unlock Pranathi's surprise."
+  },
+
   // 2. Background Music Configuration
   // "Kaarkuzhal Kadavaiye" from VadaChennai (Composed by Santhosh Narayanan)
   music: {

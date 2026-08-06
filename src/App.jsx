@@ -16,6 +16,7 @@ import { HerDigitalAuraSection } from './components/HerDigitalAuraSection';
 import { OurMemoriesGrandEntrySection } from './components/OurMemoriesGrandEntrySection';
 import { SectionUnlockGate } from './components/SectionUnlockGate';
 import { CinematicPortalTransition } from './components/CinematicPortalTransition';
+import { PasswordLockScreen } from './components/PasswordLockScreen';
 import confetti from 'canvas-confetti';
 import { birthdayData } from './config/birthdayData';
 
@@ -68,6 +69,17 @@ export const PINK_SHADES = [
 ];
 
 export default function App() {
+  const isPasscodeEnabled = birthdayData.passcodeConfig?.enabled ?? true;
+  const [isSiteLocked, setIsSiteLocked] = useState(() => {
+    if (!isPasscodeEnabled) return false;
+    return sessionStorage.getItem('birthday_site_unlocked') !== 'true';
+  });
+
+  const handlePasscodeUnlock = () => {
+    sessionStorage.setItem('birthday_site_unlocked', 'true');
+    setIsSiteLocked(false);
+  };
+
   const [hasStarted, setHasStarted] = useState(false);
   const [unlockedLevel, setUnlockedLevel] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -334,6 +346,11 @@ export default function App() {
         <span>Shade: <strong>{currentShade.name}</strong></span>
         <span className="w-2 h-2 rounded-full animate-ping" style={{ backgroundColor: currentShade.accent }} />
       </div>
+
+      {/* Website Password Lock Screen Overlay */}
+      {isSiteLocked && (
+        <PasswordLockScreen onUnlock={handlePasscodeUnlock} />
+      )}
     </div>
   );
 }
