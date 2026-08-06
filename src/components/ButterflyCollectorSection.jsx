@@ -107,7 +107,7 @@ const MEMORIES_LIST = [
     subtitle: 'Bright blue skies and warm smiles',
     date: 'Sunny Days',
     caption: 'Surrounded by laughter, sunshine, and joyful friends making unforgettable memories together.',
-    photoUrl: '/photos/butterfly_1.jpg',
+    photoUrl: '/photos/butterfly_9.jpg',
     baseX: '18%',
     baseY: '26%',
     size: 56,
